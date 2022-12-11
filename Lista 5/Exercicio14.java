@@ -1,44 +1,40 @@
-import java.util.Random;
+import java.util.Scanner;
 
 public class Exercicio14 {
 	public static void main(String[] args){
-        Random gerador = new Random();
+        Scanner sc = new Scanner(System.in);
+        int i, j;
+        int  matriz[][]= new int [3][3];
 
-        int x1 = gerador.nextInt(9) + 1, x2 = gerador.nextInt(9) + 1, x3 = gerador.nextInt(9) + 1,
-            x4 = gerador.nextInt(9) + 1, x5 = gerador.nextInt(9) + 1, x6 = gerador.nextInt(9) + 1,
-            x7 = gerador.nextInt(9) + 1, x8 = gerador.nextInt(9) + 1, x9 = gerador.nextInt(9) + 1;
-
-        while(
-            (
-                ((x1 + x2 + x3) !=  15) || ((x4 + x5 + x6) !=  15) || ((x7 + x8 + x9) !=  15) ||
-                ((x1 + x4 + x6) !=  15) || ((x2 + x5 + x8) !=  15) || ((x3 + x6 + x9) !=  15) ||
-                ((x1 + x5 + x9) !=  15) || ((x3 + x5 + x7) !=  15)
-            ) ||
-            (
-                (x1 == x2) || (x1 == x3) || (x1 == x4) || (x1 == x5) || (x1 == x6) || (x1 == x7) || (x1 == x8) || (x1 == x9) ||
-                (x2 == x3) || (x2 == x4) || (x2 == x5) || (x2 == x6) || (x2 == x7) || (x2 == x8) || (x2 == x9) ||
-                (x3 == x4) || (x3 == x5) || (x3 == x6) || (x3 == x7) || (x3 == x8) || (x3 == x9) ||
-                (x4 == x5) || (x4 == x6) || (x4 == x7) || (x4 == x8) || (x4 == x9) ||
-                (x5 == x6) || (x5 == x7) || (x5 == x8) || (x5 == x9) ||
-                (x6 == x7) || (x6 == x8) || (x6 == x9) ||
-                (x7 == x8) || (x7 == x9) ||
-                (x8 == x9)
-            )
-        )
-        {
-            x1 = gerador.nextInt(9) + 1;
-            x2 = gerador.nextInt(9) + 1;
-            x3 = gerador.nextInt(9) + 1;
-            x4 = gerador.nextInt(9) + 1;
-            x5 = gerador.nextInt(9) + 1;
-            x6 = gerador.nextInt(9) + 1;
-            x7 = gerador.nextInt(9) + 1;
-            x8 = gerador.nextInt(9) + 1;
-            x9 = gerador.nextInt(9) + 1;
+        for (i =0;i<3;i++){
+        	for (j=0;j<3;j++){
+				System.out.println("Qual o valor de "+(i+1)+"X"+(j+1)+"?");
+				matriz[i][j] = sc.nextInt();
+        	}
         }
-
-        System.out.println(x1 + " - " + x2 + " - " + x3);
-        System.out.println(x4 + " - " + x5 + " - " + x6);
-        System.out.println(x7 + " - " + x8 + " - " + x9);
+        boolean ehQuadradoMagico = true;
+    	int primeiraLinha = 0;
+    	int primeiraColuna = 0;
+        
+        for (i=0;i<3;i++){
+        	int totalLinha = 0;
+        	int totalColuna = 0;
+        	for (j=0;j<3;j++){
+        		if(i==0){
+        			primeiraLinha+=matriz[i][j];
+        			primeiraColuna+=matriz[j][i];
+        		}
+        		totalLinha+=matriz[i][j];
+        		totalColuna+=matriz[j][i];
+        	}
+    		if(totalLinha!=primeiraLinha || totalLinha!=totalColuna || totalColuna!=primeiraColuna || primeiraColuna!=primeiraLinha){
+    			ehQuadradoMagico = false;
+    		}
+        }
+        if(ehQuadradoMagico){
+        	System.out.println("É um quadrado mágico");
+        } else {
+        	System.out.println("Não é um quadrado mágico");
+        }
 	}
 }
